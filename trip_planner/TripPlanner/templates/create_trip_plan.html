@@ -1,0 +1,14 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Trip Plan</title>
+</head>
+<body>
+    <h2>Create Trip Plan</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Trip Plan</button>
+    </form>
+</body>
+</html>

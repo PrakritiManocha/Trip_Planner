@@ -1,0 +1,14 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expenditure</title>
+</head>
+<body>
+    <h2>Add Expenditure</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Expenditure</button>
+    </form>
+</body>
+</html>

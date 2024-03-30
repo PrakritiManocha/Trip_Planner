@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+<div class="form-group">
+      <label for="is_group_leader">Are you a group leader?</label>
+      <select class="form-control" id="is_group_leader" name="is_group_leader">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</body>
+</html>

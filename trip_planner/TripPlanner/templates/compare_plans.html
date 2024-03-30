@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Plans</title>
+</head>
+<body>
+    <h2>Compare Plans</h2>
+    {% for plan_with_events in plans_with_events %}
+        <h3>{{ plan_with_events.plan.name }} Events</h3>
+        {% if plan_with_events.events %}
+            <ul>
+                {% for event in plan_with_events.events %}
+                    <li>{{ event.activities }} - {{ event.date }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No events for this plan</p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

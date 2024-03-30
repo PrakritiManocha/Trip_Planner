@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333; 
+            padding: 10px;
+        }
+
+        ul {
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        li {
+            display: inline-block;
+            margin-right: 10px; 
+        }
+
+        a {
+            text-decoration: none; 
+            color: white; 
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Trip Planner</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'create_trip_plan' %}">Create Trip Plan</a></li>
+                {% if is_group_leader %}
+                    <li><a href="{% url 'select_plan' trip_plan_id=1 %}">Select Plan</a></li>
+                    <li><a href="{% url 'compare_plans' trip_plan_id=1 %}">Compare Plans</a></li>
+                    <li><a href="{% url 'add_location' %}">Add Location</a></li>
+                    <li><a href="{% url 'add_expenditure' event_id=1 %}">Add Expenditure</a></li>
+                    <li><a href="{% url 'create_event' trip_plan_id=1 %}">Add Events</a></li> 
+                {% endif %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    {% else %}
+        <p>Welcome, guest!</p>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            </ul>
+        </nav>
+    {% endif %}
+    <h2>Upcoming Events</h2>
+    <ul>
+        {% for event in upcoming_events %}
+            <li>{{ event.activities }} - {{ event.date }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Current Day Events</h2>
+    <ul>
+        {% for event in current_day_events %}
+            <li>{{ event.activities }} - {{ event.date }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Expenditure: {{ total_expenditure }}</p>
+</body>
+</html>
